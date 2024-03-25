@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
-
+import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap modal components
 
 export default function Register(props) {
   const inputName = useRef(null);
@@ -8,6 +8,7 @@ export default function Register(props) {
   const inputPassword = useRef(null);
   const inputPhone = useRef(null);
   const inputConfirm_Password = useRef(null);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false); // State for registration success
 
   const handleRegister = async () => {
     const name = inputName.current.value;
@@ -28,7 +29,8 @@ export default function Register(props) {
       });
       
       if (response.data.success) {
-        console.log("Regis successful!"); // Added log
+        console.log("Registrasi berhasil!");
+        setRegistrationSuccess(true); // Set registration success to true
       } else {
         console.error('Token not found in response');
       }
@@ -63,6 +65,16 @@ export default function Register(props) {
         </div>
         <button type="button" className="btn btn-primary" onClick={handleRegister}>Register</button>
       </form>
+      {/* Bootstrap Modal */}
+      <Modal show={registrationSuccess} onHide={() => setRegistrationSuccess(false)}> {/* Show modal if registrationSuccess is true */}
+        <Modal.Header closeButton>
+          <Modal.Title>Registrasi Berhasil!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Anda telah berhasil terdaftar.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => setRegistrationSuccess(false)}>Tutup</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

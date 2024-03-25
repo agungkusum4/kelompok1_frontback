@@ -1,11 +1,13 @@
 .login-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
+  max-width: 400px;
+  margin: 50px auto; /* Mengatur margin atas dan bawah menjadi 50px dan mengatur posisi menjadi tengah */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-image: url('../Images/Irigasi.jpg'); /* Ganti 'nama-file-foto.jpg' dengan nama file foto yang Anda inginkan */
+  background-size: cover; /* Memastikan foto diisi dengan baik di dalam area */
+  background-position: center; /* Mengatur posisi foto ke tengah */
+}
 
 
   .login-form label {
@@ -30,6 +32,7 @@
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
+    margin-bottom: 10px;
   }
 
   .login-form button:hover {

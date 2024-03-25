@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import Cookies from "universal-cookie";
+import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap modal components
 import './login.css'; 
 
 export default function Login(props) {
@@ -8,6 +9,7 @@ export default function Login(props) {
   const inputPassword = useRef(null);
   const cookies = new Cookies();
   const [loginError, setLoginError] = useState(false); // State to manage login error
+  const [showErrorModal, setShowErrorModal] = useState(false); // State to control error modal visibility
 
   const handleLogin = async () => {
     const email = inputEmail.current.value;
@@ -29,10 +31,12 @@ export default function Login(props) {
       } else {
         console.error('Token not found in response');
         setLoginError(true); // Set login error to true
+        setShowErrorModal(true); // Show error modal
       }
     } catch (error) {
       console.error('Error during login:', error);
       setLoginError(true); // Set login error to true
+      setShowErrorModal(true); // Show error modal
       // You can provide feedback to the user here
     }
   }
@@ -41,9 +45,13 @@ export default function Login(props) {
     props.onRegisterClick(); // Call onRegisterClick function passed via props
   };
 
+  const handleCloseErrorModal = () => {
+    setShowErrorModal(false); // Close error modal
+    setLoginError(false); // Reset login error state
+  }
+
   return (
     <div className="login-form">
-      {loginError && <p className='gagal'>Login gagal. Silakan cek email atau password Anda.</p>} {/* Display login error message */}
       <form>
         <div className="mb-3">
           <label htmlFor="input-email" className="form-label">
@@ -60,6 +68,19 @@ export default function Login(props) {
         </button>
         <button type="button" className="btn btn-secondary" onClick={handleRegisterClick}>Register</button> {/* Add a Register button */}
       </form>
+
+      {/* Bootstrap Modal */}
+      <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Login Gagal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Login Gagal. Silahkan cek email dan password anda.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseErrorModal}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
