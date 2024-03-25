@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap modal components
+import { Modal, Button } from 'react-bootstrap'; 
 
 export default function Register(props) {
   const inputName = useRef(null);
@@ -8,7 +8,7 @@ export default function Register(props) {
   const inputPassword = useRef(null);
   const inputPhone = useRef(null);
   const inputConfirm_Password = useRef(null);
-  const [registrationSuccess, setRegistrationSuccess] = useState(false); // State for registration success
+  const [registrationSuccess, setRegistrationSuccess] = useState(false); 
 
   const handleRegister = async () => {
     const name = inputName.current.value;
@@ -30,7 +30,7 @@ export default function Register(props) {
       
       if (response.data.success) {
         console.log("Registrasi berhasil!");
-        setRegistrationSuccess(true); // Set registration success to true
+        setRegistrationSuccess(true); 
       } else {
         console.error('Token not found in response');
       }

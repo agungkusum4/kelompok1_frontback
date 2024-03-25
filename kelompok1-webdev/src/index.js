@@ -6,14 +6,14 @@ import Register from './components/regis';
 
 function Index() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isRegisterClicked, setIsRegisterClicked] = useState(false); // Tambahkan state untuk menandai bahwa tombol register telah diklik
+  const [isRegisterClicked, setIsRegisterClicked] = useState(false); 
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
   const handleRegisterClick = () => {
-    setIsRegisterClicked(true); // Atur state untuk menunjukkan bahwa tombol register telah diklik
+    setIsRegisterClicked(true);
   };
 
   return (
@@ -21,9 +21,9 @@ function Index() {
       {isLoggedIn ? (
         <App />
       ) : isRegisterClicked ? (
-        <Register /> // Tampilkan komponen Register jika tombol register telah diklik
+        <Register /> 
       ) : (
-        <Login onLogin={handleLogin} onRegisterClick={handleRegisterClick} /> // Tambahkan prop onRegisterClick yang akan dipanggil saat tombol register diklik
+        <Login onLogin={handleLogin} onRegisterClick={handleRegisterClick} /> 
       )}
     </div>
   );

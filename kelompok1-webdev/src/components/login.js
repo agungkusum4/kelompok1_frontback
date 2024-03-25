@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import Cookies from "universal-cookie";
-import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap modal components
+import { Modal, Button } from 'react-bootstrap';
 import './login.css'; 
 
 export default function Login(props) {
   const inputEmail = useRef(null);
   const inputPassword = useRef(null);
   const cookies = new Cookies();
-  const [loginError, setLoginError] = useState(false); // State to manage login error
-  const [showErrorModal, setShowErrorModal] = useState(false); // State to control error modal visibility
+  const [loginError, setLoginError] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleLogin = async () => {
     const email = inputEmail.current.value;
@@ -25,29 +25,28 @@ export default function Login(props) {
 
       if (response.data.success) {
         cookies.set("Authorization", response.data.token);
-        console.log("Logging in..."); // Added log
-        props.onLogin(); // Call onLogin function passed via props
-        console.log("Login successful!"); // Added log
+        console.log("Logging in...");
+        props.onLogin();
+        console.log("Login successful!");
       } else {
         console.error('Token not found in response');
-        setLoginError(true); // Set login error to true
-        setShowErrorModal(true); // Show error modal
+        setLoginError(true);
+        setShowErrorModal(true);
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setLoginError(true); // Set login error to true
-      setShowErrorModal(true); // Show error modal
-      // You can provide feedback to the user here
+      setLoginError(true);
+      setShowErrorModal(true);
     }
   }
 
   const handleRegisterClick = () => {
-    props.onRegisterClick(); // Call onRegisterClick function passed via props
+    props.onRegisterClick();
   };
 
   const handleCloseErrorModal = () => {
-    setShowErrorModal(false); // Close error modal
-    setLoginError(false); // Reset login error state
+    setShowErrorModal(false); 
+    setLoginError(false); 
   }
 
   return (
